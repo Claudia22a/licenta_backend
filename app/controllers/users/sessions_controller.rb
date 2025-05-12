@@ -3,17 +3,14 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
-    token = Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil)
+    sign_in(resource_name, resource, store: false)
+    token = Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil).first
     render json: { user: resource.as_json(only: [ :id, :email ]), token: token }, status: :ok
   end
 
   def destroy
-    if request.env["warden-jwt_auth.token"]
-      Warden::JWTAuth::TokenRevoker.new.call(request.env["warden-jwt_auth.token"])
-      render json: { message: "Logged out successfully" }, status: :ok
-    else
-      render json: { error: "No token provided" }, status: :unprocessable_entity
-    end
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    render json: { message: "Logged out successfully" }, status: :ok
   end
 
   private

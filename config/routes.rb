@@ -16,11 +16,13 @@ Rails.application.routes.draw do
   },
   defaults: { format: :json }
 
+  get "/current_user", to: "users/users#current"
+
   as :user do
     post "login", to: "users/sessions#create"
     delete "logout", to: "users/sessions#destroy"
     post "signup", to: "users/registrations#create"
   end
 
-  root to: 'application#index'
+  root to: "application#index"
 end

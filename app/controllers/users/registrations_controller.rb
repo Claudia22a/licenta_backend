@@ -4,7 +4,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     if resource.save
-      token = Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil)
+      sign_in(resource_name, resource, store: false)
+      token = Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil).first
       render json: { user: resource.as_json(only: [ :id, :email ]), token: token }, status: :created
     else
       render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
