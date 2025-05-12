@@ -24,5 +24,12 @@ Rails.application.routes.draw do
     post "signup", to: "users/registrations#create"
   end
 
+  namespace :api do
+  namespace :v1 do
+    resources :babies, only: [ :index, :create, :update ]
+    end
+  end
+
+
   root to: "application#index"
 end
