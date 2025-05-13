@@ -5,9 +5,9 @@ class LogEntry < ApplicationRecord
   validates :entry_type, presence: true
   validates :logged_at, presence: true
 
-  ENTRY_TYPES = %w[sleep feeding diaper walk medical]
+  ENTRY_TYPES = %w[sleep feed diaper walk medical custom]
   MOODS = %w[happy sleepy fussy sick calm]
 
   validates :entry_type, inclusion: { in: ENTRY_TYPES }
-  validates :mood, inclusion: { in: MOODS }
+  validates :mood, inclusion: { in: MOODS }, allow_blank: true
 end

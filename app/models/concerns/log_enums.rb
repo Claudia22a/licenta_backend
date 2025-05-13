@@ -2,7 +2,7 @@ module LogEnums
   extend ActiveSupport::Concern
 
   included do
-    enum feeding_type: {
+    enum :feeding_type, {
       breastfeeding: 0,
       pumped_breastmilk: 1,
       formula: 2,
@@ -14,7 +14,7 @@ module LogEnums
       other_feeding: 99
     }
 
-    enum diaper_type: {
+    enum :diaper_type, {
       wet: 0,
       dirty: 1,
       mixed: 2,
@@ -25,7 +25,7 @@ module LogEnums
       other_diaper: 99
     }
 
-    enum sleep_type: {
+    enum :sleep_type, {
       nap: 0,
       overnight: 1,
       early_nap: 2,
@@ -39,7 +39,7 @@ module LogEnums
       other_sleep: 99
     }
 
-    enum walk_type: {
+    enum :walk_type, {
       stroller_walk: 0,
       carrier_walk: 1,
       indoor_walk: 2,
@@ -53,7 +53,7 @@ module LogEnums
       other_walk: 99
     }
 
-    enum tag_type: {
+    enum :tag_type, {
       growth_spurt: 0,
       vaccination_day: 1,
       sleep_regression: 2,
@@ -65,7 +65,7 @@ module LogEnums
       other_tag: 99
     }
 
-    enum symptom_type: {
+    enum :symptom_type, {
       fever: 0,
       colic: 1,
       rash: 2,
