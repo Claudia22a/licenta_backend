@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_12_140521) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_13_080335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,33 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_140521) do
     t.index ["user_id"], name: "index_babies_on_user_id"
   end
 
+  create_table "log_entries", force: :cascade do |t|
+    t.bigint "baby_id", null: false
+    t.string "entry_type", null: false
+    t.datetime "logged_at", default: -> { "now()" }, null: false
+    t.text "notes"
+    t.integer "duration"
+    t.decimal "amount", precision: 6, scale: 2
+    t.string "unit"
+    t.string "location"
+    t.string "mood"
+    t.integer "diaper_type"
+    t.integer "feeding_type"
+    t.integer "sleep_type"
+    t.integer "walk_type"
+    t.integer "symptom_type"
+    t.integer "tag_type"
+    t.string "other_diaper_type"
+    t.string "other_feeding_type"
+    t.string "other_sleep_type"
+    t.string "other_walk_type"
+    t.string "other_symptom_type"
+    t.string "other_tag_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["baby_id"], name: "index_log_entries_on_baby_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -42,4 +69,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_140521) do
   end
 
   add_foreign_key "babies", "users"
+  add_foreign_key "log_entries", "babies"
 end

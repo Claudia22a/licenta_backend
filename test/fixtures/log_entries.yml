@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  baby: one
+  entry_type: MyString
+  logged_at: 2025-05-13 11:03:35
+  notes: MyText
+
+two:
+  baby: two
+  entry_type: MyString
+  logged_at: 2025-05-13 11:03:35
+  notes: MyText
