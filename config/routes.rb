@@ -26,8 +26,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :babies, only: [ :index, :create, :update ]
-      resources :log_entries, only: [ :index, :create ]
+      resources :babies, only: [ :index, :create, :update ] do
+        resources :log_entries, only: [ :index, :create ]
+      end
     end
   end
 
