@@ -2,7 +2,7 @@ class Api::V1::BabiesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    babies = current_user.babies
+    babies = current_user.babies.includes(:measurements)
     render json: babies
   end
 

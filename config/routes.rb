@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :babies, only: [ :index, :create, :update ] do
         resources :log_entries, only: [ :index, :create ]
+        resources :measurements, only: [ :create ]
       end
     end
   end

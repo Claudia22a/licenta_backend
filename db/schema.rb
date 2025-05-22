@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_13_180033) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_16_090432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -59,6 +59,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_180033) do
     t.index ["baby_id"], name: "index_log_entries_on_baby_id"
   end
 
+  create_table "measurements", force: :cascade do |t|
+    t.bigint "baby_id", null: false
+    t.decimal "weight"
+    t.decimal "height"
+    t.decimal "head_circumference"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["baby_id"], name: "index_measurements_on_baby_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,4 +84,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_180033) do
 
   add_foreign_key "babies", "users"
   add_foreign_key "log_entries", "babies"
+  add_foreign_key "measurements", "babies"
 end
